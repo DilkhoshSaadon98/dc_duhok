@@ -1,6 +1,7 @@
 import 'package:dc_duhok/core/constant/app_theme.dart';
 import 'package:dc_duhok/core/constant/color.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class CustomAppBar extends StatelessWidget {
@@ -25,7 +26,7 @@ class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 60,
+      height: 60.h,
       width: width ?? Get.width,
       margin: const EdgeInsets.only(top: 15),
       child: TextFormField(

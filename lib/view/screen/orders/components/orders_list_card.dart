@@ -1,3 +1,5 @@
+import 'package:another_stepper/dto/stepper_data.dart';
+import 'package:another_stepper/widgets/another_stepper.dart';
 import 'package:dc_duhok/controller/orders/pending_controller.dart';
 import 'package:dc_duhok/core/constant/app_theme.dart';
 import 'package:dc_duhok/core/constant/color.dart';
@@ -6,6 +8,7 @@ import 'package:dc_duhok/core/functions/formating_numbers.dart';
 import 'package:dc_duhok/core/shared/custom_divider.dart';
 import 'package:dc_duhok/core/shared/custom_sized_box.dart';
 import 'package:dc_duhok/data/model/orders_model.dart';
+import 'package:dc_duhok/view/screen/orders/components/custom_stepper_data.dart';
 import 'package:dc_duhok/view/screen/orders/components/single_row_orders_items.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,6 +24,16 @@ class CardOrdersList extends GetView<OrdersPendingController> {
   @override
   Widget build(BuildContext context) {
     OrdersPendingController controller = Get.put(OrdersPendingController());
+    List<StepperData> stepperData = [
+      customStepperData('Accepted', 'Your order accepted',
+          listdata.ordersStatus == 1 ? true : false, Icons.looks_one_outlined),
+      customStepperData('Preapare', 'Your order under preapare',
+          listdata.ordersStatus == 2 ? true : false, Icons.looks_two_outlined),
+      customStepperData('Delivered', 'Your order on the way',
+          listdata.ordersStatus == 3 ? true : false, Icons.looks_3_outlined),
+      customStepperData('Done', 'Your order Done Success',
+          listdata.ordersStatus == 4 ? true : false, Icons.looks_4_outlined),
+    ];
     return Container(
       padding:
           EdgeInsets.symmetric(horizontal: 15, vertical: constScreenPadding),
@@ -68,6 +81,17 @@ class CardOrdersList extends GetView<OrdersPendingController> {
           ),
           customSizedBox(5),
           customDivider(),
+          AnotherStepper(
+            barThickness: 3,
+            activeIndex: 2,
+            activeBarColor: secondColor,
+            inActiveBarColor: primaryColor,
+            stepperList: stepperData,
+            stepperDirection: Axis.horizontal,
+            iconWidth: 40,
+            iconHeight: 40,
+          ),
+          customSizedBox(),
           SigleRowOrdersItems(
               title: "Order Type",
               data:
@@ -85,13 +109,6 @@ class CardOrdersList extends GetView<OrdersPendingController> {
               title: "Payment Method",
               data:
                   " ${controller.printPaymentMethod(listdata.ordersPaymentmethod.toString())}",
-            );
-          }),
-          GetBuilder<OrdersPendingController>(builder: (controller) {
-            return SigleRowOrdersItems(
-              title: "Order Status",
-              data:
-                  controller.printOrderStatus(listdata.ordersStatus.toString()),
             );
           }),
           customDivider(),

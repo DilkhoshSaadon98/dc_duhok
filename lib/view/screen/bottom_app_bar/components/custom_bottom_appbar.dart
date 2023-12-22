@@ -3,6 +3,7 @@ import 'package:dc_duhok/controller/main_screen_controller.dart';
 import 'package:dc_duhok/core/constant/app_theme.dart';
 import 'package:dc_duhok/core/constant/color.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class CustomBottomAppBarHome extends GetView<MainScreenControllerImp> {
@@ -18,7 +19,7 @@ class CustomBottomAppBarHome extends GetView<MainScreenControllerImp> {
                         ? white
                         : white))),
             child: CurvedNavigationBar(
-              height: 50,
+              height: 55.h,
               animationCurve: Curves.linearToEaseOut,
               animationDuration: const Duration(milliseconds: 500),
               backgroundColor: white,
